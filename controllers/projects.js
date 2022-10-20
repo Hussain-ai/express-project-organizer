@@ -37,4 +37,19 @@ router.get('/:id', (req, res) => {
   })
 })
 
+
+// NEEDS FIX VVV
+router.get('/categories', (req, res) => {
+  db.category.findOne({
+    where: { id: req.params.id }
+  })
+  .then((project) => {
+    if (!project) throw Error()
+    res.render('projects/show', { project: project })
+  })
+  .catch((error) => {
+    res.status(400).render('main/404')
+  })
+})
+
 module.exports = router
